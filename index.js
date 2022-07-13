@@ -42,24 +42,28 @@ function playRound(playerSelection, computerSelection)
 
 function game() 
 {
-    for (let i = 0; i < 5; i++)
+    if (playerScore == 5 || computerScore == 5)
+    {
+        if (computerScore == playerScore) 
+        {
+            console.log("You tied with the computer");
+        }
+        else if (computerScore > playerScore) 
+        {
+            console.log("You lost to the computer");
+        }
+        else 
+        {
+            console.log("You beat the computer");
+        }
+    }
+    else 
     {
         let playerSelection = prompt("Rock, paper, scissors: ");
         let computerSelection = computerPlay();
 
         console.log(playRound(playerSelection, computerSelection));
-    }
-    if (computerScore == playerScore) 
-    {
-        console.log("You tied with the computer");
-    }
-    else if (computerScore > playerScore) 
-    {
-        console.log("You lost to the computer");
-    }
-    else 
-    {
-        console.log("You beat the computer");
+        game();
     }
 }
 
