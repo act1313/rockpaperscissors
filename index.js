@@ -16,67 +16,63 @@ function playRound(playerSelection, computerSelection)
 {
     if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) 
     {
-        return `Tie! ${correctCap(playerSelection)} is equal to ${correctCap(computerSelection)}` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`; 
+        alert(`Tie! ${correctCap(playerSelection)} is equal to ${correctCap(computerSelection)}` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`); 
+        checkWinner();
     }
     else if (playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "paper")
     {
         computerScore += 1;
-        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`;
+        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
+        checkWinner();
     }
     else if (playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "scissors") 
     {
         computerScore += 1;
-        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`;
+        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
+        checkWinner();
     }
     else if (playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "rock")
     {
         computerScore += 1;
-        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`;
+        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
+        checkWinner();
     }
     else 
     {
         playerScore += 1;
-        return `You win! ${correctCap(playerSelection)} beats ${correctCap(computerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`;
+        alert(`You win! ${correctCap(playerSelection)} beats ${correctCap(computerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
+        checkWinner();
     }
 }
 
-function game() 
-{
-    if (playerScore == 5 || computerScore == 5)
+function checkWinner() {
+    if (playerScore >= 5) 
     {
-        if (computerScore == playerScore) 
-        {
-            console.log("You tied with the computer");
-        }
-        else if (computerScore > playerScore) 
-        {
-            console.log("You lost to the computer");
-        }
-        else 
-        {
-            console.log("You beat the computer");
-        }
+        alert("You Win!");
+        return;
+    } else if (computerScore >= 5) {
+        alert("What an L! You lost!");
+        return;
     }
-    else 
-    {
-        let playerSelection = prompt("Rock, paper, scissors: ");
-        let computerSelection = computerPlay();
+}
 
-        console.log(playRound(playerSelection, computerSelection));
-        game();
+function clicked(playerSelection) {
+    let computerSelection = computerPlay(); 
+    if (checkWinner()) {
+        return;
+    } else {
+        playRound(playerSelection, computerSelection);
     }
 }
 
 // game();
-
-let computerSelection = computerPlay();
 
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
 
 
-rock.addEventListener('click', () => playRound("rock", computerSelection));
-paper.addEventListener('click', () => playRound("paper", computerSelection));
-scissors.addEventListener('click', () => playRound("scissors", computerSelection));
+rock.addEventListener('click', () => clicked("rock"));
+paper.addEventListener('click', () => clicked("paper"));
+scissors.addEventListener('click', () => clicked("scissors"));
 
