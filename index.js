@@ -1,6 +1,8 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const newline = '\n';
+
 function computerPlay() 
 {
     let options = ['Rock', 'Paper', 'Scissors'];
@@ -16,32 +18,33 @@ function playRound(playerSelection, computerSelection)
 {
     if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) 
     {
-        alert(`Tie! ${correctCap(playerSelection)} is equal to ${correctCap(computerSelection)}` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`); 
         checkWinner();
+        return `Tie! ${correctCap(playerSelection)} is equal to ${correctCap(computerSelection)}. Player Score is ${playerScore} and Computer Score is ${computerScore}`; 
     }
     else if (playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "paper")
     {
         computerScore += 1;
-        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
         checkWinner();
+        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}! Player Score is ${playerScore} and Computer Score is ${computerScore}`;
     }
     else if (playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "scissors") 
     {
         computerScore += 1;
-        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
         checkWinner();
+        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}! Player Score is ${playerScore} and Computer Score is ${computerScore}`;
     }
     else if (playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "rock")
     {
         computerScore += 1;
-        alert(`You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
         checkWinner();
+        return `You Lose! ${correctCap(computerSelection)} beats ${correctCap(playerSelection)}! Player Score is ${playerScore} and Computer Score is ${computerScore}`;
+        
     }
     else 
     {
         playerScore += 1;
-        alert(`You win! ${correctCap(playerSelection)} beats ${correctCap(computerSelection)}!` && `Player Score is ${playerScore} and Computer Score is ${computerScore}`);
         checkWinner();
+        return `You win! ${correctCap(playerSelection)} beats ${correctCap(computerSelection)}! Player Score is ${playerScore} and Computer Score is ${computerScore}`;
     }
 }
 
@@ -49,9 +52,15 @@ function checkWinner() {
     if (playerScore >= 5) 
     {
         alert("You Win!");
+        playerScore = 0;
+        computerScore = 0;
+        score.textContent = "Player Score is 0 and Computer Score is 0";
         return;
     } else if (computerScore >= 5) {
         alert("What an L! You lost!");
+        playerScore = 0;
+        computerScore = 0;
+        score.textContent = "Player Score is 0 and Computer Score is 0";
         return;
     }
 }
@@ -61,12 +70,13 @@ function clicked(playerSelection) {
     if (checkWinner()) {
         return;
     } else {
-        playRound(playerSelection, computerSelection);
+        score.textContent = playRound(playerSelection, computerSelection);
     }
 }
 
 // game();
 
+const score = document.querySelector('.score');
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
